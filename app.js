@@ -13,7 +13,6 @@ var monk = require('monk');
 var config = require('./config.js')
 
 var db = monk(config.db.getConnStr());
-console.log(config.db.getConnStr());
 
 var app = express();
 app.http().io()
@@ -25,7 +24,7 @@ app.locals = config.global
 // app.use(express.session({secret: ':7b>64/`NJ7#Vsk.r3+kv>6%g7]%U='}));
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'routes'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -46,7 +45,7 @@ app.db = db;
 //autoload routes from the routes directory
 //first parameter is routes directory,
 //second parameter boolean (recursive or not)
-app.use(require('expressjs.routes.autoload')(path.join(__dirname, './routes'), false));
+app.use(require('expressjs.routes.autoload')(path.join(__dirname, './routes'), true));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
