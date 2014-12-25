@@ -99,9 +99,11 @@ module.exports = function(router){
 		if ('action-delete' in req.body) {
 
 			collec.remove({_id:req.params.id}, function (err, count, status) {
+				res.redirect(path)
 			})
+		} else {
+			res.redirect(path)
 		}
-		res.redirect(path)
 
 	});
 
